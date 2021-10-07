@@ -82,12 +82,14 @@ import { DefaultRefreshService } from './DefaultRefreshService';
 import { DefaultCatalogRulesEnforcer } from '../ingestion/CatalogRules';
 import { Config } from '@backstage/config';
 import { Logger } from 'winston';
+import { PermissionClient } from '@backstage/permission-common';
 
 export type CatalogEnvironment = {
   logger: Logger;
   database: PluginDatabaseManager;
   config: Config;
   reader: UrlReader;
+  permissions: PermissionClient;
 };
 
 /**
