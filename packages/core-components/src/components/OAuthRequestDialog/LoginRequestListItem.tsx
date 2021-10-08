@@ -24,6 +24,7 @@ import {
   Button,
 } from '@material-ui/core';
 import React, { useState } from 'react';
+import { isError } from '@backstage/errors';
 import { PendingAuthRequest } from '@backstage/core-plugin-api';
 
 export type LoginRequestListItemClassKey = 'root';
@@ -45,14 +46,14 @@ type RowProps = {
 
 const LoginRequestListItem = ({ request, busy, setBusy }: RowProps) => {
   const classes = useItemStyles();
-  const [error, setError] = useState<Error>();
+  const [error, setError] = useState<string>();
 
   const handleContinue = async () => {
     setBusy(true);
     try {
       await request.trigger();
     } catch (e) {
-      setError(e);
+      setError(isError(e) ? e.message : 'An unspecified error occurred');
     } finally {
       setBusy(false);
     }
@@ -67,13 +68,7 @@ const LoginRequestListItem = ({ request, busy, setBusy }: RowProps) => {
       </ListItemAvatar>
       <ListItemText
         primary={request.provider.title}
-        secondary={
-          error && (
-            <Typography color="error">
-              {error.message || 'An unspecified error occurred'}
-            </Typography>
-          )
-        }
+        secondary={error && <Typography color="error">{error}</Typography>}
       />
       <Button color="primary" variant="contained" onClick={handleContinue}>
         Log in

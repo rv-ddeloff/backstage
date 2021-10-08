@@ -201,7 +201,7 @@ describe('AzureBlobStoragePublish', () => {
       let error;
       try {
         await publisher.publish({ entity, directory });
-      } catch (e) {
+      } catch (e: any) {
         error = e;
       }
 

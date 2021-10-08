@@ -32,6 +32,7 @@ import { KubernetesRequestBody } from '@backstage/plugin-kubernetes-common';
 import { KubernetesClientProvider } from './KubernetesClientProvider';
 import { KubernetesFanOutHandler } from './KubernetesFanOutHandler';
 import { KubernetesClientBasedFetcher } from './KubernetesFetcher';
+import { assertError } from '@backstage/errors';
 
 export interface RouterOptions {
   logger: Logger;
@@ -75,6 +76,7 @@ export const makeRouter = (
         await kubernetesFanOutHandler.getKubernetesObjectsByEntity(requestBody);
       res.json(response);
     } catch (e) {
+      assertError(e);
       logger.error(
         `action=retrieveObjectsByServiceId service=${serviceId}, error=${e}`,
       );

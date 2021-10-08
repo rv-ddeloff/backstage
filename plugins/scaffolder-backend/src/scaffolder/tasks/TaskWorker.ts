@@ -15,7 +15,7 @@
  */
 
 import { JsonObject, JsonValue } from '@backstage/config';
-import { InputError } from '@backstage/errors';
+import { assertError, InputError } from '@backstage/errors';
 import fs from 'fs-extra';
 import * as Handlebars from 'handlebars';
 import { validate as validateJsonSchema } from 'jsonschema';
@@ -252,6 +252,7 @@ export class TaskWorker {
             status: 'completed',
           });
         } catch (error) {
+          assertError(error);
           await task.emitLog(String(error.stack), {
             ...metadata,
             status: 'failed',
@@ -297,6 +298,7 @@ export class TaskWorker {
 
       await task.complete('completed', { output });
     } catch (error) {
+      assertError(error);
       await task.complete('failed', {
         error: { name: error.name, message: error.message },
       });

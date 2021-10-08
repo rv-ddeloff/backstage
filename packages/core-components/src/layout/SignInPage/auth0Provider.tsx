@@ -23,6 +23,7 @@ import {
   auth0AuthApiRef,
   errorApiRef,
 } from '@backstage/core-plugin-api';
+import { ForwardedError } from '@backstage/errors';
 
 const Component: ProviderComponent = ({ onResult }) => {
   const auth0AuthApi = useApi(auth0AuthApiRef);
@@ -51,7 +52,7 @@ const Component: ProviderComponent = ({ onResult }) => {
         },
       });
     } catch (error) {
-      errorApi.post(error);
+      errorApi.post(new ForwardedError('Auth0 login failed', error));
     }
   };
 

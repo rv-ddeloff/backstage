@@ -25,6 +25,7 @@ import {
 } from './types';
 import { useApi, errorApiRef } from '@backstage/core-plugin-api';
 import { GridItem } from './styles';
+import { ForwardedError } from '@backstage/errors';
 
 const Component: ProviderComponent = ({ config, onResult }) => {
   const { apiRef, title, message } = config as SignInProviderConfig;
@@ -54,7 +55,7 @@ const Component: ProviderComponent = ({ config, onResult }) => {
         },
       });
     } catch (error) {
-      errorApi.post(error);
+      errorApi.post(new ForwardedError('Login failed', error));
     }
   };
 
