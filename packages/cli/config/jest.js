@@ -17,6 +17,9 @@
 const fs = require('fs-extra');
 const path = require('path');
 const glob = require('util').promisify(require('glob'));
+const { version } = require('../package.json');
+
+const projectCacheKey = `backstage_cli_${version.replace(/\./g, '_')}`;
 
 async function getProjectConfig(targetPath, displayName) {
   const configJsPath = path.resolve(targetPath, 'jest.config.js');
@@ -73,6 +76,7 @@ async function getProjectConfig(targetPath, displayName) {
   const transformModulePattern = transformModules && `(?!${transformModules})`;
 
   const options = {
+    name: projectCacheKey,
     displayName,
     rootDir: path.resolve(targetPath, 'src'),
     coverageDirectory: path.resolve(targetPath, 'coverage'),
@@ -80,10 +84,11 @@ async function getProjectConfig(targetPath, displayName) {
     moduleNameMapper: {
       '\\.(css|less|scss|sss|styl)$': require.resolve('jest-css-modules'),
     },
+    testEnvironment: 'jsdom',
 
     transform: {
-      '\\.esm\\.js$': require.resolve('./jestEsmTransform.js'), // See jestEsmTransform.js
-      '\\.(js|jsx|ts|tsx)$': require.resolve('@sucrase/jest-plugin'),
+      // '\\.esm\\.js$': require.resolve('@sucrase/jest-plugin'), // See jestEsmTransform.js
+      '\\.(js|jsx|ts|tsx)$': require.resolve('./sucraseTransform.js'),
       '\\.(bmp|gif|jpg|jpeg|png|frag|xml|svg|eot|woff|woff2|ttf)$':
         require.resolve('./jestFileTransform.js'),
       '\\.(yaml)$': require.resolve('jest-transform-yaml'),
