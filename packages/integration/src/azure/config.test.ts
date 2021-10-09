@@ -31,22 +31,24 @@ describe('readAzureIntegrationConfig', () => {
     data: Partial<AzureIntegrationConfig>,
   ): Promise<Config> {
     const fullSchema = await loadConfigSchema({
-      dependencies: [require('../../package.json').name],
+      dependencies: ['@backstage/integration'],
     });
     const serializedSchema = fullSchema.serialize() as {
-      schemas: { path: string }[];
+      schemas: { value: { properties?: { integrations?: object } } }[];
     };
     const schema = await loadConfigSchema({
       serialized: {
-        ...serializedSchema, // grab the schema from this package only
-        schemas: serializedSchema.schemas.filter(s => s.path === 'config.d.ts'),
+        ...serializedSchema, // only include schemas that apply to integrations
+        schemas: serializedSchema.schemas.filter(
+          s => s.value?.properties?.integrations,
+        ),
       },
     });
     const processed = schema.process(
-      [{ data: { integrations: { azure: [data] } }, context: 'app' }],
+      [{ data: { integrations: { github: [data] } }, context: 'app' }],
       { visibility: ['frontend'] },
     );
-    return new ConfigReader((processed[0].data as any).integrations.azure[0]);
+    return new ConfigReader((processed[0].data as any).integrations.github[0]);
   }
 
   it('reads all values', () => {
