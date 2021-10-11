@@ -15,15 +15,13 @@
  */
 
 import React, { Fragment, ReactElement, ComponentType } from 'react';
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Popover,
-  ListItemTextProps,
-} from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Popover from '@material-ui/core/Popover';
+import ListItemTextProps from '@material-ui/core/ListItemTextProps';
 import { VerticalMenuIcon } from './VerticalMenuIcon';
 
 type ActionItemProps = {
