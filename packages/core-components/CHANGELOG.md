@@ -1,5 +1,12 @@
 # @backstage/core-components
 
+## 0.6.2
+
+### Patch Changes
+
+- 6ec56d5a57: update the null check to use the optional chaining operator in case of non-null assertion operator is not working in function extractInitials(values: string)
+- 81c2a1af86: Resolve a warning in `<Button>` related to not using `React.forwardRef`.
+
 ## 0.6.1
 
 ### Patch Changes

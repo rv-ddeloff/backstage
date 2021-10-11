@@ -1,5 +1,15 @@
 # @backstage/plugin-api-docs
 
+## 0.6.12
+
+### Patch Changes
+
+- 3c50c86604: Remove unused dependency on material-icons/font
+- Updated dependencies
+  - @backstage/core-components@0.6.2
+  - @backstage/plugin-catalog@0.7.1
+  - @backstage/plugin-catalog-react@0.5.3
+
 ## 0.6.11
 
 ### Patch Changes

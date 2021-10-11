@@ -1,5 +1,13 @@
 # @backstage/plugin-catalog-react
 
+## 0.5.3
+
+### Patch Changes
+
+- b03b9f19e0: added sorting in entity `Name` column by `metadata.title` if present
+- Updated dependencies
+  - @backstage/core-components@0.6.2
+
 ## 0.5.2
 
 ### Patch Changes

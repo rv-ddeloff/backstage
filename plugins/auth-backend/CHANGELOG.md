@@ -1,5 +1,11 @@
 # @backstage/plugin-auth-backend
 
+## 0.4.4
+
+### Patch Changes
+
+- defae8f579: Added extra configuration parameters for active directory file system identity
+
 ## 0.4.3
 
 ### Patch Changes

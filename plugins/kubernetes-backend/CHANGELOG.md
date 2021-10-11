@@ -1,5 +1,11 @@
 # @backstage/plugin-kubernetes-backend
 
+## 0.3.17
+
+### Patch Changes
+
+- 89bcf90b66: Refactor kubernetes fetcher to reduce boilerplate code
+
 ## 0.3.16
 
 ### Patch Changes

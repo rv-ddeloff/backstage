@@ -1,5 +1,11 @@
 # @backstage/plugin-code-coverage-backend
 
+## 0.1.13
+
+### Patch Changes
+
+- da9241530a: check for existence of lines property in files
+
 ## 0.1.12
 
 ### Patch Changes
