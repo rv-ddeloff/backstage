@@ -144,6 +144,12 @@ describe('CatalogIdentityClient', () => {
       ],
     });
 
+    expect(tokenIssuer.issueToken).toHaveBeenCalledWith({
+      claims: {
+        sub: 'backstage.io/auth-backend',
+      },
+    });
+
     expect(claims).toMatchObject([
       'user:default/inigom',
       'user:default/imontoya',

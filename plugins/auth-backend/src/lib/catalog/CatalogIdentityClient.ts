@@ -103,13 +103,17 @@ export class CatalogIdentityClient {
       })
       .filter((ref): ref is EntityName => ref !== null);
 
+    const token = await this.tokenIssuer.issueToken({
+      claims: { sub: 'backstage.io/auth-backend' },
+    });
+
     const filter = resolvedEntityRefs.map(ref => ({
       kind: ref.kind,
       'metadata.namespace': ref.namespace,
       'metadata.name': ref.name,
     }));
     const entities = await this.catalogApi
-      .getEntities({ filter })
+      .getEntities({ filter }, { token })
       .then(r => r.items);
 
     if (entityRefs.length !== entities.length) {
